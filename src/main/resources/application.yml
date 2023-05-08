@@ -1,12 +1,12 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/jwt_security
-    username: postgresql
+    username: postgres
     password: Adeshina@100
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-auto
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
