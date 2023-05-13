@@ -1,5 +1,6 @@
 package com.mubarak.springsecurity.auth;
 
+import com.mubarak.springsecurity.config.JwtService;
 import com.mubarak.springsecurity.user.Role;
 import com.mubarak.springsecurity.user.User;
 import com.mubarak.springsecurity.user.UserRepository;
@@ -13,6 +14,7 @@ public class AuthenticationService {
     private final UserRepository repository;
 
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -23,6 +25,11 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
         repository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+
         return null;
     }
 
